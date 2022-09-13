@@ -22,7 +22,6 @@
     <ProjectReference Include="..\..\Application\Application.csproj" />
     <ProjectReference Include="..\..\Persistence\Persistence.csproj" />
     <ProjectReference Include="..\Client\EndPoint.Site.Client.csproj" />
-    <ProjectReference Include="..\Shared\EndPoint.Site.Shared.csproj" />
   </ItemGroup>
 
 
