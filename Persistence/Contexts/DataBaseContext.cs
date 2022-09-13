@@ -1,4 +1,5 @@
-﻿using Domain.Entities.Categorys;
+﻿using Domain.Entities.Cart;
+using Domain.Entities.Categorys;
 using Domain.Entities.Products;
 using Domain.Entities.User;
 using Microsoft.EntityFrameworkCore;
@@ -52,9 +53,11 @@ namespace Persistence.Contexts
             //        ProductId = 1
             //    });
 
+            modelBuilder.Entity<CartItem>()
+                .HasKey(ci => new { ci.UserId, ci.ProductId, ci.ProductTypeId });
 
             modelBuilder.Entity<ProductVariant>()
-    .HasKey(p => new { p.ProductId, p.ProductTypeId });
+                .HasKey(p => new { p.ProductId, p.ProductTypeId });
 
             modelBuilder.Entity<ProductType>().HasData(
                     new ProductType { Id = 1, Name = "Default" },
@@ -307,6 +310,7 @@ namespace Persistence.Contexts
         public DbSet<ProductType> ProductTypes { get; set; }
         public DbSet<ProductVariant> ProductVariants { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<CartItem> CartItems { get; set; }
         //public DbSet<ProductImages> ProductImages { get; set; }
         //public DbSet<ProductFeatures> ProductFeatures { get; set; }
     }
