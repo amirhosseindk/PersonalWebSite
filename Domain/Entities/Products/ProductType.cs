@@ -1,0 +1,14 @@
+﻿using Domain.Entities.Commons;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Domain.Entities.Products
+{
+    public class ProductType : BaseEntity
+    {
+        public string Name { get; set; } = String.Empty;
+    }
+}
