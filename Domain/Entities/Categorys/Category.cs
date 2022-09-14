@@ -1,9 +1,5 @@
 ﻿using Domain.Entities.Commons;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.Entities.Categorys
 {
@@ -14,6 +10,11 @@ namespace Domain.Entities.Categorys
         public string Url { get; set; } = String.Empty;
         public virtual Category ParentCategory { get; set; }
         public int? ParentCategoryId { get; set; }
+        public bool IsVisible { get; set; } = true;
+        [NotMapped]
+        public bool IsEditing { get; set; } = false;
+        [NotMapped]
+        public bool IsNew { get; set; } = false;
 
         //برای نمایش زیر دسته های هر گروه
         public virtual ICollection<Category> SubCategories { get; set; }

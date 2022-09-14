@@ -8,5 +8,6 @@ namespace Domain.Entities.User
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
         public Address Address { get; set; }
+        public string Role { get; set; } = "Customer";
     }
 }

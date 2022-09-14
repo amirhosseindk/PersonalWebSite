@@ -1,14 +1,13 @@
 ﻿using Common.ServiceResponse;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Interfaces.Server.Category
 {
     public interface ICategoryService
     {
         Task<ResultDto<List<Domain.Entities.Categorys.Category>>> GetCategories();
+        Task<ResultDto<List<Domain.Entities.Categorys.Category>>> GetAdminCategories();
+        Task<ResultDto<List<Domain.Entities.Categorys.Category>>> AddCategory(Domain.Entities.Categorys.Category category);
+        Task<ResultDto<List<Domain.Entities.Categorys.Category>>> UpdateCategory(Domain.Entities.Categorys.Category category);
+        Task<ResultDto<List<Domain.Entities.Categorys.Category>>> DeleteCategory(int id);
     }
 }
