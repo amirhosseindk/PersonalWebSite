@@ -20,6 +20,8 @@ namespace EndPoint.Site.Server.Services
 
         public int GetUserId() => int.Parse(_httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
 
+        public string GetUserEmail() => _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name);
+
         public async Task<ResultDto<string>> Login(string email, string password)
         {
             var response = new ResultDto<string>();
@@ -140,6 +142,12 @@ namespace EndPoint.Site.Server.Services
             await _context.SaveChangesAsync();
 
             return new ResultDto<bool> { Data = true, Message = "Password has been changed." , IsSuccess = true};
+        }
+
+
+        public async Task<User> GetUserByEmail(string email)
+        {
+            return await _context.Users.FirstOrDefaultAsync(u => u.Email.Equals(email));
         }
     }
 }

@@ -1,9 +1,4 @@
 ﻿using Domain.Entities.Commons;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Domain.Entities.User
 {
@@ -12,5 +7,6 @@ namespace Domain.Entities.User
         public string Email { get; set; } = string.Empty;
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
+        public Address Address { get; set; }
     }
 }

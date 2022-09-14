@@ -317,6 +317,7 @@ namespace Persistence.Contexts
         public DbSet<CartItem> CartItems { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<Address> Addresses { get; set; }
         //public DbSet<ProductImages> ProductImages { get; set; }
         //public DbSet<ProductFeatures> ProductFeatures { get; set; }
     }

@@ -1,8 +1,10 @@
+using Application.Interfaces.Client.Address;
 using Application.Interfaces.Client.Auth;
 using Application.Interfaces.Client.Cart;
 using Application.Interfaces.Client.Category;
 using Application.Interfaces.Client.Order;
 using Application.Interfaces.Client.Product;
+using Application.Services.Client.Address;
 using Application.Services.Client.Auth;
 using Application.Services.Client.Cart;
 using Application.Services.Client.Category;
@@ -25,6 +27,7 @@ builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ICartService, CartService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IAddressService, AddressService>();
 builder.Services.AddOptions();
 builder.Services.AddAuthorizationCore();
 builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();

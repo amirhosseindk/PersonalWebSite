@@ -15,6 +15,7 @@ namespace Persistence.Contexts
         DbSet<CartItem> CartItems { get; set; }
         DbSet<Order> Orders { get; set; }
         DbSet<OrderItem> OrderItems { get; set; }
+        DbSet<Address> Addresses { get; set; }
         //DbSet<ProductImages> ProductImages { get; set; }
         //DbSet<ProductFeatures> ProductFeatures { get; set; }
     }

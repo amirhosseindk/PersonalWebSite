@@ -93,9 +93,9 @@ namespace Application.Services.Server.Order
             return response;
         }
 
-        public async Task<ResultDto<bool>> PlaceOrder()
+        public async Task<ResultDto<bool>> PlaceOrder(int userId)
         {
-            var products = (await _cartService.GetDbCartProducts()).Data;
+            var products = (await _cartService.GetDbCartProducts(userId)).Data;
             decimal totalPrice = 0;
             products.ForEach(product => totalPrice += product.Price * product.Quantity);
 
@@ -110,7 +110,7 @@ namespace Application.Services.Server.Order
 
             var order = new Domain.Entities.Order.Order
             {
-                UserId = _authService.GetUserId(),
+                UserId = userId,
                 InsertTime = DateTime.Now,
                 TotalPrice = totalPrice,
                 OrderItems = orderItems
@@ -119,7 +119,7 @@ namespace Application.Services.Server.Order
             _context.Orders.Add(order);
 
             _context.CartItems.RemoveRange(_context.CartItems
-                .Where(ci => ci.UserId == _authService.GetUserId()));
+                .Where(ci => ci.UserId == userId));
 
             await _context.SaveChangesAsync();
 

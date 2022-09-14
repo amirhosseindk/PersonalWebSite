@@ -1,5 +1,9 @@
-﻿using Domain.Entities.Cart;
-using System.Security.Claims;
+﻿using Application.Interfaces.Server.Auth;
+using Application.Interfaces.Server.Cart;
+using Common.ServiceResponse;
+using Domain.Entities.Cart;
+using Microsoft.EntityFrameworkCore;
+using Persistence.Contexts;
 
 namespace Application.Services.Server.Cart
 {
@@ -74,10 +78,12 @@ namespace Application.Services.Server.Cart
             return new ResultDto<int> { Data = count };
         }
 
-        public async Task<ResultDto<List<CartProductResponse>>> GetDbCartProducts()
+        public async Task<ResultDto<List<CartProductResponse>>> GetDbCartProducts(int? userId = null)
         {
+            if (userId == null)
+                userId = _authService.GetUserId();
             return await GetCartProducts(await _context.CartItems
-                .Where(ci => ci.UserId == _authService.GetUserId()).ToListAsync());
+                .Where(ci => ci.UserId == userId).ToListAsync());
         }
 
         public async Task<ResultDto<bool>> AddToCart(CartItem cartItem)
@@ -143,4 +149,5 @@ namespace Application.Services.Server.Cart
             return new ResultDto<bool> { Data = true };
         }
     }
+
 }

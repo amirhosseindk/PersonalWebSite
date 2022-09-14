@@ -17,6 +17,10 @@ using Microsoft.IdentityModel.Tokens;
 using Application.Interfaces.Server.Order;
 using Application.Services.Server.Order;
 using EndPoint.Site.Server.Services;
+using Application.Interfaces.Server.Payment;
+using Application.Services.Server.Payment;
+using Application.Interfaces.Server.Address;
+using Application.Services.Server.Address;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -38,6 +42,8 @@ builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ICartService, CartService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IPaymentService, PaymentService>();
+builder.Services.AddScoped<IAddressService, AddressService>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>

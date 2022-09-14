@@ -5,7 +5,7 @@ namespace Application.Interfaces.Server.Order
 {
     public interface IOrderService
     {
-        Task<ResultDto<bool>> PlaceOrder();
+        Task<ResultDto<bool>> PlaceOrder(int userId);
         Task<ResultDto<List<OrderOverviewResponse>>> GetOrders();
         Task<ResultDto<OrderDetailsResponse>> GetOrderDetails(int orderId);
     }
