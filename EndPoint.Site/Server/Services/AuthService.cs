@@ -1,26 +1,24 @@
-﻿using Application.Interfaces.Server.Auth;
-using Common.ServiceResponse;
-using Domain.Entities.User;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
-using Persistence.Contexts;
+﻿using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 
-namespace Application.Services.Server.Auth
+namespace EndPoint.Site.Server.Services
 {
     public class AuthService : IAuthService
     {
         private readonly DataBaseContext _context;
         private readonly IConfiguration _configuration;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public AuthService(DataBaseContext context,IConfiguration configuration)
+        public AuthService(DataBaseContext context, IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
             _configuration = configuration;
+            _httpContextAccessor = httpContextAccessor;
         }
+
+        public int GetUserId() => int.Parse(_httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
 
         public async Task<ResultDto<string>> Login(string email, string password)
         {
@@ -40,6 +38,8 @@ namespace Application.Services.Server.Auth
             else
             {
                 response.Data = CreateToken(user);
+                response.IsSuccess = true;
+                response.Message = "Login Successful";
             }
 
             return response;
@@ -64,7 +64,7 @@ namespace Application.Services.Server.Auth
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
-            return new ResultDto<int> { Data = user.Id, Message = "Registration successful!" };
+            return new ResultDto<int> { Data = user.Id, Message = "Registration successful!" , IsSuccess = true };
         }
 
         public async Task<bool> UserExists(string email)
@@ -139,7 +139,7 @@ namespace Application.Services.Server.Auth
 
             await _context.SaveChangesAsync();
 
-            return new ResultDto<bool> { Data = true, Message = "Password has been changed." };
+            return new ResultDto<bool> { Data = true, Message = "Password has been changed." , IsSuccess = true};
         }
     }
 }

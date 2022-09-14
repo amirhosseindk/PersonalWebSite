@@ -8,10 +8,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Pages\OrderDetails.razor.css" />
+    <None Remove="Pages\Orders.razor.css" />
     <None Remove="Shared\UserButton.razor.css" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Pages\OrderDetails.razor.css" />
+    <Content Include="Pages\Orders.razor.css" />
     <Content Include="Shared\UserButton.razor.css" />
   </ItemGroup>
 

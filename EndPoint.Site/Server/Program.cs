@@ -11,10 +11,12 @@ global using Domain.Entities.Products;
 global using Application.Interfaces.Server.Cart;
 global using Application.Services.Server.Cart;
 global using Application.Interfaces.Server.Auth;
-global using Application.Services.Server.Auth;
 global using Domain.Entities.User;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Application.Interfaces.Server.Order;
+using Application.Services.Server.Order;
+using EndPoint.Site.Server.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -35,6 +37,7 @@ builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ICartService, CartService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>

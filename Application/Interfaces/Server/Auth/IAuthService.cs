@@ -14,5 +14,6 @@ namespace Application.Interfaces.Server.Auth
         Task<bool> UserExists(string email);
         Task<ResultDto<string>> Login(string email, string password);
         Task<ResultDto<bool>> ChangePassword(int userId, string newPassword);
+        int GetUserId();
     }
 }
